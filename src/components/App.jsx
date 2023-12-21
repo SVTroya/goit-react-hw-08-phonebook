@@ -25,7 +25,7 @@ export function App() {
     :
     (<Routes>
         <Route path='/' element={<SharedLayout />}>
-          <Route index element={<ContactsBook />} />
+          <Route index element={<Home />} />
           <Route
             path='register'
             element={<RestrictedRoute redirectTo='/contacts' component={<RegisterForm />} />}

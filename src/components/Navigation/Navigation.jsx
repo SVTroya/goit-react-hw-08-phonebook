@@ -7,10 +7,10 @@ function Navigation() {
   const { isLoggedIn } = useAuth();
   return (
     <StyledNavigation>
-      {/*<StyledLink to="/">Home</StyledLink>*/}
-      {/*{isLoggedIn && (
+      <StyledLink to="/">Home</StyledLink>
+      {isLoggedIn && (
         <StyledLink to="/contacts">Contacts Book</StyledLink>
-      )}*/}
+      )}
     </StyledNavigation>
   )
 }
