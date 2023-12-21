@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { addContact, fetchContacts, removeContact } from './operations'
+import { addContactThunk, fetchContactsThunk, removeContactThunk } from './operations'
+import { logOutThunk } from '../auth/operations'
 
-const contactsBookInitialState = {
+const initialState = {
   contacts: {
     items: [],
     isLoading: false,
@@ -24,9 +25,9 @@ function handleRejected(state, action) {
   state.contacts.error = action.payload
 }
 
-const contactsBookSlice = createSlice({
+const slice = createSlice({
   name: 'contactsBook',
-  initialState: contactsBookInitialState,
+  initialState,
   reducers: {
     setFilterValue: (state, action) => {
       state.filter = action.payload
@@ -34,27 +35,32 @@ const contactsBookSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchContacts.pending, handlePending)
-      .addCase(fetchContacts.fulfilled, (state, action) => {
+      .addCase(fetchContactsThunk.pending, handlePending)
+      .addCase(fetchContactsThunk.fulfilled, (state, action) => {
         handleFulfilled(state)
         state.contacts.items = action.payload
       })
-      .addCase(fetchContacts.rejected, handleRejected)
-      .addCase(addContact.pending, handlePending)
-      .addCase(addContact.fulfilled, (state, action) => {
+      .addCase(logOutThunk.fulfilled, (state, {payload})=>{
+        state.contacts.items=[]
+      })
+      .addCase(fetchContactsThunk.rejected, handleRejected)
+
+      .addCase(addContactThunk.pending, handlePending)
+      .addCase(addContactThunk.fulfilled, (state, action) => {
         handleFulfilled(state)
         state.contacts.items.push(action.payload)
       })
-      .addCase(addContact.rejected, handleRejected)
-      .addCase(removeContact.pending, handlePending)
-      .addCase(removeContact.fulfilled, (state, action) => {
+      .addCase(addContactThunk.rejected, handleRejected)
+
+      .addCase(removeContactThunk.pending, handlePending)
+      .addCase(removeContactThunk.fulfilled, (state, action) => {
         handleFulfilled(state)
         const index = state.contacts.items.findIndex(contact => contact.id === action.payload)
         state.contacts.items.splice(index, 1)
       })
-      .addCase(removeContact.rejected, handleRejected)
+      .addCase(removeContactThunk.rejected, handleRejected)
   }
 })
 
-export const { setFilterValue } = contactsBookSlice.actions
-export const contactsBookReducer = contactsBookSlice.reducer
+export const { setFilterValue } = slice.actions
+export const contactsBookReducer = slice.reducer

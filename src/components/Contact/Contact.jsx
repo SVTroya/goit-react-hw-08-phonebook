@@ -1,8 +1,8 @@
-import { IconWrapper, Name, Phone } from './Contact.styled'
+import { ContactWrapper, IconWrapper, Name, Phone, RightWrapper } from './Contact.styled'
 import PropTypes from 'prop-types'
 import { ImBin } from 'react-icons/im'
 import { useDispatch } from 'react-redux'
-import { removeContact } from '../../redux/operations'
+import { removeContactThunk } from '../../redux/contactsBook/operations'
 
 Contact.propTypes = {
   contact: PropTypes.shape({
@@ -11,20 +11,22 @@ Contact.propTypes = {
   })
 }
 
-export function Contact({ contact: { id, name, phone } }) {
+export function Contact({ contact: { id, name, number } }) {
   const dispatch = useDispatch()
 
   function handleRemoveContact(id) {
-    dispatch(removeContact(id))
+    dispatch(removeContactThunk(id))
   }
 
   return (
-    <>
+    <ContactWrapper>
       <Name>{name}</Name>
-      <Phone>tel.: {phone}</Phone>
-      <IconWrapper>
-        <ImBin size={20} onClick={() => handleRemoveContact(id)} />
-      </IconWrapper>
-    </>
+      <RightWrapper>
+        <Phone>tel.: {number}</Phone>
+        <IconWrapper>
+          <ImBin size={20} onClick={() => handleRemoveContact(id)} />
+        </IconWrapper>
+      </RightWrapper>
+    </ContactWrapper>
   )
 }

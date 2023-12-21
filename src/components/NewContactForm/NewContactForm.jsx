@@ -1,9 +1,9 @@
-import { ErrorMessage, Form, FormWrapper, InputWrapper } from './NewContactForm.styled'
+import { ErrorMessage, Form, FormContainer, InputWrapper } from './NewContactForm.styled'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectContacts } from '../../redux/selectors'
+import { selectContacts } from '../../redux/contactsBook/selectors'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { addContact } from '../../redux/operations'
+import { addContactThunk } from '../../redux/contactsBook/operations'
 
 export function NewContactForm() {
   const contacts = useSelector(selectContacts)
@@ -12,15 +12,14 @@ export function NewContactForm() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
 
   function onSubmit(data) {
-    const { nameInput, phoneInput } = data
     if (contacts.some(({ name }) => {
-      return name === nameInput
+      return name === data.name
     })
     ) {
-      toast.warn(`${nameInput} is already in contacts!`)
+      toast.warn(`${data.name} is already in contacts!`)
       return
     }
-    dispatch(addContact({ name: nameInput, phone: phoneInput }))
+    dispatch(addContactThunk(data))
     reset()
   }
 
@@ -29,31 +28,31 @@ export function NewContactForm() {
   }
 
   return (
-    <FormWrapper>
+    <FormContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <InputWrapper>
           <span>Full Name</span>
           <input
-            {...register('nameInput', {
+            {...register('name', {
               required: 'Name is required!',
               minLength: { value: 2, message: 'Name must be at least 2 symbols long!' }
             })}
             placeholder='Enter name' />
-          {errors.nameInput && <ErrorMessage>{errors.nameInput.message}</ErrorMessage>}
+          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         </InputWrapper>
         <InputWrapper>
           <span>Phone number</span>
           <input
             type='tel'
-            {...register('phoneInput', {
+            {...register('number', {
               required: 'Phone number is required!',
               minLength: { value: 9, message: 'Phone number is too short!' }
             })}
             placeholder='Enter phone number' />
-          {errors.phoneInput && <ErrorMessage>{errors.phoneInput.message}</ErrorMessage>}
+          {errors.number && <ErrorMessage>{errors.number.message}</ErrorMessage>}
         </InputWrapper>
         <button type='submit' onClick={handleClick}>Add contact</button>
       </Form>
-    </FormWrapper>
+    </FormContainer>
   )
 }

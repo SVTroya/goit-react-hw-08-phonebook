@@ -1,36 +1,29 @@
 import styled from 'styled-components'
 
-export const FormContainer = styled.section`
+export const StyledForm = styled.form`
+  margin: 40px auto;
   width: 100%;
-  background-color: #008080;
-  border-radius: 20px;
-  box-shadow: 2px 2px 6px 2px gray;
-
-  @media only screen and (min-width: 1158px) {
-    width: 50%;
-  }
-`
-
-export const Form = styled.form`
+  max-width: 320px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  margin: 30px 30px 40px;
-
-  padding: 30px 30px;
+  padding: 20px 30px 30px;
   background-color: cornsilk;
   font-size: 20px;
   font-weight: 500;
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: inset 1px 1px 6px 3px #a8a190;
   color: #004242;
   border: 1px solid grey;
 
-  @media only screen and (min-width: 1158px) {
-    margin: 60px;
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
   }
 
   button {
-    margin-top: 10px;
+    margin: 0 auto;
     width: fit-content;
     border-radius: 20px;
     border: none;
