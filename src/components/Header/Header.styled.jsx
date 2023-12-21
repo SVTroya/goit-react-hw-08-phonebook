@@ -15,6 +15,14 @@ export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  p{
+    width: min-content;
+
+    @media only screen and (min-width: 768px) {
+      width: auto;
+    }
+  }
 `
 
 export const StyledLink = styled(NavLink)`

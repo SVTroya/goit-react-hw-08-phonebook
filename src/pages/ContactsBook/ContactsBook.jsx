@@ -1,6 +1,6 @@
 import { NewContactForm } from '../../components/NewContactForm/NewContactForm'
 import { ListOfContacts } from '../../components/ListOfContacts/ListOfContacts'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -34,7 +34,7 @@ function ContactsBook() {
     <>
       <ContactsBookContainer>
         <NewContactForm />
-        <BinderRings/>
+        <BinderRings />
         <ListOfContacts />
         <FadeLoader
           loading={isLoading}

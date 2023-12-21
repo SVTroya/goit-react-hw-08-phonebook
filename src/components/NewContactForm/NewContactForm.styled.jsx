@@ -54,7 +54,7 @@ export const InputWrapper = styled.label`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-size: 23px;
+  font-size: 20px;
   position: relative;
   line-height: 1;
   padding-bottom: 20px;
@@ -66,10 +66,18 @@ export const InputWrapper = styled.label`
     border: none;
     padding: 2px 10px;
     box-shadow: 0 0 3px 1px #a8a190;
-    font-size: 20px;
+    font-size: 18px;
 
     &:hover, &:focus {
       outline: none;
+    }
+
+    @media only screen and (min-width: 768px) {
+      font-size: 23px;
+
+      input {
+        font-size: 20px;
+      }
     }
   }
 `

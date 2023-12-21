@@ -33,13 +33,13 @@ export function App() {
           <Route
             path='login'
             element={
-              <RestrictedRoute redirectTo="/contacts" component={<LoginForm />}
+              <RestrictedRoute redirectTo='/contacts' component={<LoginForm />}
               />
             } />
           <Route
             path='contacts'
             element={
-              <PrivateRoute redirectTo="/login" component={<ContactsBook />}
+              <PrivateRoute redirectTo='/login' component={<ContactsBook />}
               />
             } />
         </Route>

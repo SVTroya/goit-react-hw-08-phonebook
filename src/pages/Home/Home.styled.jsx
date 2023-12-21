@@ -5,4 +5,5 @@ export const HomeStyled = styled.div`
   padding-top: 30px;
   display: flex;
   justify-content: center;
+  text-align: center;
 `

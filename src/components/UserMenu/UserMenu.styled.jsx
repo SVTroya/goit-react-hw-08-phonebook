@@ -2,8 +2,12 @@ import styled from 'styled-components'
 
 export const StyledMenu = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 10px;
   align-items: center;
+
+  @media only screen and (min-width: 768px) {
+    gap: 30px;
+  }
 
   p {
     border-radius: 16px;
