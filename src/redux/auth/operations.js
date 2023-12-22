@@ -19,7 +19,7 @@ export const registerThunk = createAsyncThunk(
       setAuthHeader(data.token)
       return data
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message)
+      return thunkAPI.rejectWithValue(e.response.data.message)
     }
   })
 

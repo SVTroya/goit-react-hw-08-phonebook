@@ -2,13 +2,18 @@ import { ErrorMessage, InputWrapper, StyledForm } from './RegisterForm.styled'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { registerThunk } from '../../redux/auth/operations'
+import { toast } from 'react-toastify'
 
 function RegisterForm() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
   const dispatch = useDispatch()
 
   function onSubmit(data) {
-    dispatch(registerThunk(data))
+    dispatch(registerThunk(data)).unwrap()
+      .catch(
+        (err)=> {
+          toast.error(err)
+        })
     reset()
   }
 
